@@ -38,7 +38,7 @@ final class AdvancedGoogleMap {
 		}
 
 		// enqueue block assets
-		add_action('enqueue_block_assets', [$this, 'agm_external_libraries']);
+		// add_action('enqueue_block_assets', [$this, 'agm_external_libraries']);
 	}
 
 	/**
@@ -75,7 +75,7 @@ final class AdvancedGoogleMap {
 	 */
 	public function agm_blocks_init() {
 		// register single block
-		$this->agm_register_block('bootstrap');
+		// $this->agm_register_block('gmap');
 		$this->agm_register_block('google-map');
 	}
 
@@ -99,8 +99,11 @@ final class AdvancedGoogleMap {
 	 * Enqueue Block Assets
 	 */
 	public function agm_external_libraries() {
+		$suffix       = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		// enqueue JS
-		wp_enqueue_script('agm-lib', AGM_INC_URL . 'js/plugin.js', array(), AGM_VERSION, true);
+		wp_register_script('gmap-api', '//maps.googleapis.com/maps/api/js?sensor=true', ['jquery'], null, true);
+		wp_enqueue_script('gmap-js', AGM_INC_URL . 'js/gmaps' . $suffix . '.js', null, AGM_VERSION, true);
+		wp_enqueue_script('agm-lib', AGM_INC_URL . 'js/plugin.js', null, AGM_VERSION, true);
 	}
 }
 

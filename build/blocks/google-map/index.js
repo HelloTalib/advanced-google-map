@@ -44,23 +44,314 @@ function Edit(_ref) {
   // const { content, color } = attributes;
   const {
     id,
-    language
+    language,
+    location,
+    zoom,
+    mapType,
+    latitude,
+    longitude,
+    height
   } = attributes;
   const lang_par = language ? language : 'en';
-  const encoded_address = encodeURI('Bogura');
-  const url = `https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&q=${encoded_address}&zoom=18&language=${lang_par}`;
+  const encoded_address = encodeURI(location);
+  const lat = latitude && longitude ? `&center=37.7749,-122.4194` : '';
+  const url = `https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&q=${encoded_address}&zoom=${zoom}&maptype=${mapType}&language=${lang_par}${lat}`;
   setAttributes({
     id: clientId.slice(0, 8)
   });
-  // console.log(attributes);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Map Settings', 'advanced-google-map'),
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Location', 'advanced-google-map'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Type the specified location name that you want to display on the map.', 'advanced-google-map'),
+    value: location,
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter the Location Name', 'advanced-goole-map'),
+    onChange: location => setAttributes({
+      location
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Zoom Level', 'advanced-google-map'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Set the initial zoom level of the map. The higher the value will be the more zoomed in the map', 'advanced-google-map'),
+    value: zoom,
+    onChange: zoom => setAttributes({
+      zoom
+    }),
+    min: 1,
+    max: 21
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Map View Type', 'advanced-google-map'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Set the type of map to be displayed, such as road map, satellite imagery, or terrain.', 'advanced-google-map'),
+    value: mapType,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Roadmap', 'advanced-google-map'),
+      value: 'roadmap'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Satellite', 'advanced-google-map'),
+      value: 'satellite'
+    }],
+    onChange: mapType => {
+      setAttributes({
+        mapType
+      });
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Language for your Location'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select the language of the map interface. such as for English select English or French select French', 'advanced-google-map'),
+    value: language,
+    options: [{
+      value: 'af',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Afrikaans', 'advanced-google-map')
+    }, {
+      value: 'sq',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Albanian', 'advanced-google-map')
+    }, {
+      value: 'am',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Amharic', 'advanced-google-map')
+    }, {
+      value: 'ar',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Arabic', 'advanced-google-map')
+    }, {
+      value: 'hy',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Armenian', 'advanced-google-map')
+    }, {
+      value: 'az',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Azerbaijani', 'advanced-google-map')
+    }, {
+      value: 'eu',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Basque', 'advanced-google-map')
+    }, {
+      value: 'be',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Belarusian', 'advanced-google-map')
+    }, {
+      value: 'bn',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bengali', 'advanced-google-map')
+    }, {
+      value: 'bs',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bosnian', 'advanced-google-map')
+    }, {
+      value: 'bg',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bulgarian', 'advanced-google-map')
+    }, {
+      value: 'my',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Burmese', 'advanced-google-map')
+    }, {
+      value: 'ca',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Catalan', 'advanced-google-map')
+    }, {
+      value: 'zh',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Chinese', 'advanced-google-map')
+    }, {
+      value: 'hr',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Croatian', 'advanced-google-map')
+    }, {
+      value: 'cs',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Czech', 'advanced-google-map')
+    }, {
+      value: 'da',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Danish', 'advanced-google-map')
+    }, {
+      value: 'nl',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dutch', 'advanced-google-map')
+    }, {
+      value: 'en',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('English', 'advanced-google-map')
+    }, {
+      value: 'et',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Estonian', 'advanced-google-map')
+    }, {
+      value: 'fa',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Farsi', 'advanced-google-map')
+    }, {
+      value: 'fi',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Finnish', 'advanced-google-map')
+    }, {
+      value: 'fr',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('French', 'advanced-google-map')
+    }, {
+      value: 'gl',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Galician', 'advanced-google-map')
+    }, {
+      value: 'ka',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Georgian', 'advanced-google-map')
+    }, {
+      value: 'de',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('German', 'advanced-google-map')
+    }, {
+      value: 'el',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Greek', 'advanced-google-map')
+    }, {
+      value: 'gu',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gujarati', 'advanced-google-map')
+    }, {
+      value: 'iw',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hebrew', 'advanced-google-map')
+    }, {
+      value: 'hi',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hindi', 'advanced-google-map')
+    }, {
+      value: 'hu',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hungarian', 'advanced-google-map')
+    }, {
+      value: 'is',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Icelandic', 'advanced-google-map')
+    }, {
+      value: 'id',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Indonesian', 'advanced-google-map')
+    }, {
+      value: 'it',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Italian', 'advanced-google-map')
+    }, {
+      value: 'ja',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Japanese', 'advanced-google-map')
+    }, {
+      value: 'kn',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Kannada', 'advanced-google-map')
+    }, {
+      value: 'kk',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Kazakh', 'advanced-google-map')
+    }, {
+      value: 'km',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Khmer', 'advanced-google-map')
+    }, {
+      value: 'ko',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Korean', 'advanced-google-map')
+    }, {
+      value: 'ky',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Kyrgyz', 'advanced-google-map')
+    }, {
+      value: 'lo',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Lao', 'advanced-google-map')
+    }, {
+      value: 'lv',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Latvian', 'advanced-google-map')
+    }, {
+      value: 'lt',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Lithuanian', 'advanced-google-map')
+    }, {
+      value: 'mk',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Macedonian', 'advanced-google-map')
+    }, {
+      value: 'ms',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Malay', 'advanced-google-map')
+    }, {
+      value: 'ml',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Malayalam', 'advanced-google-map')
+    }, {
+      value: 'mr',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Marathi', 'advanced-google-map')
+    }, {
+      value: 'mn',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Mongolian', 'advanced-google-map')
+    }, {
+      value: 'ne',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Nepali', 'advanced-google-map')
+    }, {
+      value: 'no',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Norwegian', 'advanced-google-map')
+    }, {
+      value: 'pl',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Polish', 'advanced-google-map')
+    }, {
+      value: 'pt',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Portuguese', 'advanced-google-map')
+    }, {
+      value: 'pa',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Punjabi', 'advanced-google-map')
+    }, {
+      value: 'ro',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Romanian', 'advanced-google-map')
+    }, {
+      value: 'ru',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Russian', 'advanced-google-map')
+    }, {
+      value: 'sr',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Serbian', 'advanced-google-map')
+    }, {
+      value: 'si',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Sinhalese', 'advanced-google-map')
+    }, {
+      value: 'sk',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slovak', 'advanced-google-map')
+    }, {
+      value: 'sl',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slovenian', 'advanced-google-map')
+    }, {
+      value: 'es',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Spanish', 'advanced-google-map')
+    }, {
+      value: 'sw',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Swahili', 'advanced-google-map')
+    }, {
+      value: 'sv',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Swedish', 'advanced-google-map')
+    }, {
+      value: 'ta',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tamil', 'advanced-google-map')
+    }, {
+      value: 'te',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Telugu', 'advanced-google-map')
+    }, {
+      value: 'th',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Thai', 'advanced-google-map')
+    }, {
+      value: 'tr',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Turkish', 'advanced-google-map')
+    }, {
+      value: 'uk',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Ukrainian', 'advanced-google-map')
+    }, {
+      value: 'ur',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Urdu', 'advanced-google-map')
+    }, {
+      value: 'uz',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Uzbek', 'advanced-google-map')
+    }, {
+      value: 'vi',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Vietnamese', 'advanced-google-map')
+    }, {
+      value: 'zu',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Zulu', 'advanced-google-map')
+    }],
+    onChange: language => {
+      setAttributes({
+        language
+      });
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Height', 'advanced-google-map'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Specifies the height of the map in pixels.', 'advanced-google-map'),
+    value: height,
+    onChange: height => setAttributes({
+      height
+    }),
+    min: 200,
+    max: 1800
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Map Settings Additional'),
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(' This parameter sets the center of the map to a specific location. The format for this parameter is latitude and longitude, separated by a comma. For example: center=37.7749,-122.4194', 'advanced-google-map')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Latitude', 'advanced-google-map'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('37.7749', 'advanced-google-map'),
+    value: latitude,
+    onChange: latitude => setAttributes({
+      latitude
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Longitude', 'advanced-google-map'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('-122.4194', 'advanced-google-map'),
+    value: longitude,
+    onChange: longitude => setAttributes({
+      longitude
+    })
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
     className: 'agm-google-map agm-google-map-' + id
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
     className: "agm-google-map__iframe",
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Google Map', 'advanced-google-map'),
     src: url,
-    width: "640",
-    height: "450",
+    width: "100%",
+    height: height,
     loading: "lazy"
   })));
 }
@@ -124,22 +415,26 @@ function save(_ref) {
   let {
     attributes
   } = _ref;
-  // const { content, color } = attributes;
   const {
     id,
-    language
+    language,
+    location,
+    zoom,
+    mapType,
+    height,
+    latitude,
+    longitude
   } = attributes;
   const lang_par = language ? language : 'en';
-  const encoded_address = encodeURI('Bogura');
-  const url = `https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&q=${encoded_address}&zoom=18&language=${lang_par}`;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
-    className: 'agm-google-map agm-google-map-' + id
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+  const lat = latitude && longitude ? `&center=${latitude},${longitude}` : '';
+  const encoded_address = encodeURI(location);
+  const url = `https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&q=${encoded_address}&maptype=${mapType}&zoom=${zoom}&language=${lang_par}${lat}`;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save(), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
     className: "agm-google-map__iframe",
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Google Map', 'advanced-google-map'),
     src: url,
-    width: "640",
-    height: "450",
+    width: "100%",
+    height: height,
     loading: "lazy"
   }));
 }
@@ -262,7 +557,7 @@ module.exports = window["wp"]["i18n"];
   \******************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"apiVersion":2,"name":"advanced-google-map/google-map","version":"1.0.0","title":"Google Map","category":"advanced-google-map","icon":"smiley","description":"Example block written with ESNext standard and JSX support build step required.","supports":{"html":false,"anchor":true},"attributes":{"content":{"type":"string","default":"Hello World!"},"color":{"type":"string","default":"#00ff00"}},"textdomain":"advanced-google-map","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"apiVersion":2,"name":"advanced-google-map/google-map","version":"1.0.0","title":"Google Map","category":"advanced-google-map","icon":"location","description":"Advanced google Map for WordPress Users.","supports":{"html":false,"anchor":true},"keywords":["google","map","location","address","place","maps","google map"],"attributes":{"id":{"type":"string"},"location":{"type":"string","default":"Nasa"},"zoom":{"type":"number","default":12},"mapType":{"type":"string","default":"roadmap"},"language":{"type":"string","default":"en"},"width":{"type":"number","default":450},"height":{"type":"number","default":350}},"textdomain":"advanced-google-map","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

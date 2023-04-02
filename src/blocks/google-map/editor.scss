@@ -2,6 +2,33 @@
 * Style Works for Editor Only
 */
 
-.wp-block-create-block-boilerplate {
-	border: 1px dotted rgb(1, 1, 1);
+.wp-block-advanced-google-map-google-map {
+	// border: none;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	&::before {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		bottom: 0;
+		background-color: transparent;
+		opacity:1;
+		cursor: pointer;
+	}
+	&:hover{
+		&::before{
+			transition: all .3s ease-in-out;
+			background: orangered;
+			opacity: 0.3;
+		}
+	}
+
+	iframe {
+		margin: 0;
+		padding: 0;
+		display: block;
+	}
 }

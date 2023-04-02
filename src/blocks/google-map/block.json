@@ -4,20 +4,40 @@
 	"version": "1.0.0",
 	"title": "Google Map",
 	"category": "advanced-google-map",
-	"icon": "smiley",
-	"description": "Example block written with ESNext standard and JSX support build step required.",
+	"icon": "location",
+	"description": "Advanced google Map for WordPress Users.",
 	"supports": {
 		"html": false,
 		"anchor": true
 	},
+	"keywords": ["google", "map", "location", "address", "place", "maps", "google map"],
 	"attributes": {
-		"content": {
-			"type": "string",
-			"default": "Hello World!"
+		"id": {
+			"type": "string"
 		},
-		"color": {
+		"location": {
 			"type": "string",
-			"default": "#00ff00"
+			"default": "Nasa"
+		},
+		"zoom": {
+			"type": "number",
+			"default": 12
+		},
+		"mapType": {
+			"type": "string",
+			"default": "roadmap"
+		},
+		"language":{
+			"type": "string",
+			"default": "en"
+		},
+		"width": {
+			"type": "number",
+			"default": 450
+		},
+		"height": {
+			"type": "number",
+			"default": 350
 		}
 	},
 	"textdomain": "advanced-google-map",
